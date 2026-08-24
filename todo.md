@@ -10,5 +10,5 @@
 
 - [x] Revisar el repositorio y la configuración de la compilación estática.
 - [x] Añadir un flujo de publicación para GitHub Pages y ajustar las rutas del sitio.
-- [ ] Validar el artefacto de producción y documentar la activación de Pages.
-- [ ] Guardar y entregar la corrección.
+- [x] Validar el artefacto de producción y documentar la activación de Pages.
+- [x] Guardar y entregar la corrección.
