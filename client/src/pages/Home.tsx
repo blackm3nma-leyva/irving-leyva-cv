@@ -1,441 +1,218 @@
 /**
- * Estilo Taller de Sistemas: expediente técnico editorial con base marfil,
- * azul tinta, naranja señal, geometría de circuitos y lectura asimétrica.
+ * Estilo CV esencial: una hoja profesional clara, con azul profundo,
+ * tipografía editorial sobria y el retrato como ancla personal del encabezado.
  */
-import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
-  Braces,
-  CheckCircle2,
-  ChevronRight,
-  Cpu,
-  Download,
+  BriefcaseBusiness,
+  Code2,
   FileBadge2,
   GraduationCap,
-  HardDrive,
   Mail,
   MapPin,
-  Menu,
   Network,
   Phone,
   Wrench,
-  X,
 } from "lucide-react";
 
-const navItems = [
-  { id: "perfil", label: "Perfil" },
-  { id: "capacidades", label: "Capacidades" },
-  { id: "proyectos", label: "Proyectos" },
-  { id: "trayectoria", label: "Trayectoria" },
-  { id: "credenciales", label: "Credenciales" },
-];
-
-const capabilities = [
+const skills = [
   {
-    icon: HardDrive,
-    number: "01",
-    title: "Hardware y soporte técnico",
-    level: "Nivel práctico",
-    summary:
-      "Atención metódica de equipos de escritorio desde el diagnóstico inicial hasta el mantenimiento preventivo.",
-    items: [
-      "Ensamble y desensamble de computadoras de escritorio.",
-      "Diagnóstico básico de RAM, almacenamiento, temperatura y tarjetas de video.",
-      "Limpieza general y mantenimiento preventivo de hardware.",
-    ],
+    icon: Wrench,
+    title: "Soporte y hardware",
+    status: "Práctica aplicada",
+    items: ["Ensamble, desensamble y limpieza de equipos", "Diagnóstico básico de RAM, almacenamiento y temperatura", "Mantenimiento preventivo de computadoras de escritorio"],
   },
   {
     icon: Network,
-    number: "02",
-    title: "Redes y conectividad",
-    level: "Fundamentos",
-    summary:
-      "Práctica con escenarios de red pequeños para comprender conectividad, segmentación y enrutamiento.",
-    items: [
-      "Diseño de topologías en Cisco Packet Tracer.",
-      "Configuración básica de VLANs y routers.",
-      "Interpretación de la conectividad por segmentos departamentales.",
-    ],
+    title: "Redes",
+    status: "Fundamentos",
+    items: ["Topologías en Cisco Packet Tracer", "Configuración básica de VLANs y routers", "Fundamentos de conectividad y segmentación"],
   },
   {
-    icon: Braces,
-    number: "03",
-    title: "Programación y desarrollo",
-    level: "Nivel principiante",
-    summary:
-      "Fundamentos aplicados en proyectos escolares, lógica de programación y exploración de datos.",
-    items: [
-      "Lógica y prácticas académicas con Python, C# y Java.",
-      "Procesamiento de datos y modelos sencillos en Python.",
-      "Entornos interactivos básicos en Unity con NavMesh y animación.",
-    ],
+    icon: Code2,
+    title: "Programación",
+    status: "Nivel inicial",
+    items: ["Fundamentos con Python, C# y Java", "Datos y modelos sencillos en Python", "Unity, NavMesh y Blockbench a nivel inicial"],
   },
-];
-
-const tools = [
-  "Cisco Packet Tracer",
-  "Python",
-  "C#",
-  "Java",
-  "Unity",
-  "Blockbench",
-  "Microsoft Access",
-  "Linux Mint",
-  "CachyOS",
-  "Excel",
-  "Word",
 ];
 
 const projects = [
   {
-    index: "P-01",
-    category: "Infraestructura · Cisco Packet Tracer",
     title: "Simulación de red escolar",
-    description:
-      "Configuración de una red pequeña con VLANs departamentales y enrutamiento básico para practicar segmentación y comunicación entre áreas.",
-    image: "/manus-storage/irving-leyva-network_8eb62629.jpg",
-    alt: "Modelo editorial de una topología de red con nodos conectados",
-    tags: ["VLANs", "Routers", "Topologías"],
+    meta: "Cisco Packet Tracer · VLANs · Routers",
+    text: "Ejercicio de configuración de una red pequeña con VLANs departamentales y enrutamiento básico.",
   },
   {
-    index: "P-02",
-    category: "Desarrollo · Python",
-    title: "Prácticas de datos y clasificación",
-    description:
-      "Pruebas y scripts escolares con manipulación de datos y aplicación inicial de algoritmos de clasificación, incluyendo Random Forest.",
-    image: "/manus-storage/irving-leyva-development_aab3acca.jpg",
-    alt: "Composición editorial abstracta sobre datos y árboles de decisión",
-    tags: ["Python", "Random Forest", "Datos"],
+    title: "Prácticas en Python y ciencia de datos",
+    meta: "Python · Random Forest · Datos",
+    text: "Scripts académicos con manipulación de datos y pruebas iniciales de algoritmos de clasificación.",
   },
   {
-    index: "P-03",
-    category: "Interactividad · Unity",
-    title: "Entornos interactivos simples",
-    description:
-      "Creación de escenas personales con navegación básica mediante NavMesh y animaciones de personajes dentro del motor Unity.",
-    image: "/manus-storage/irving-leyva-hardware_34db23eb.jpg",
-    alt: "Composición técnica editorial de componentes de computadora",
-    tags: ["Unity", "NavMesh", "Animación"],
+    title: "Entornos personales en Unity",
+    meta: "Unity · NavMesh · Animación",
+    text: "Escenas interactivas simples con navegación básica y animaciones de personajes.",
   },
 ];
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("perfil");
-
-  useEffect(() => {
-    const sections = document.querySelectorAll<HTMLElement>("main [data-section]");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-24% 0px -60% 0px", threshold: [0.12, 0.28, 0.5] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
-  const closeMenu = () => setMenuOpen(false);
-
   return (
-    <div className="portfolio-shell">
-      <header className="mobile-header">
-        <a className="brand-lockup" href="#inicio" aria-label="Ir al inicio">
-          <img
-            src="/manus-storage/irving-leyva-mark_7d4d3b6d.png"
-            alt=""
-            className="brand-mark"
-          />
-          <span>IL / 2026</span>
+    <div className="cv-page">
+      <aside className="technical-rail" aria-label="Datos técnicos del perfil">
+        <img src="/manus-storage/irving-leyva-mark_7d4d3b6d.png" alt="Monograma técnico de Irving Leyva" />
+        <p className="rail-code">IL / CV-26</p>
+        <span className="rail-line" />
+        <p className="rail-meta">PERFIL JR.<br />SISTEMAS</p>
+        <p className="rail-meta bottom">CDMX<br />DISPONIBLE</p>
+      </aside>
+      <header className="site-header">
+        <a href="#inicio" className="wordmark" aria-label="Ir al inicio">
+          <img src="/manus-storage/irving-leyva-mark_7d4d3b6d.png" alt="" />
+          <span>Irving Leyva</span>
         </a>
-        <button
-          className="menu-toggle"
-          type="button"
-          onClick={() => setMenuOpen((open) => !open)}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
-          aria-label={menuOpen ? "Cerrar navegación" : "Abrir navegación"}
-        >
-          {menuOpen ? <X size={19} /> : <Menu size={20} />}
-        </button>
-        <nav id="mobile-navigation" className={menuOpen ? "mobile-nav is-open" : "mobile-nav"}>
-          {navItems.map((item) => (
-            <a key={item.id} href={`#${item.id}`} onClick={closeMenu}>
-              {item.label}
-              <ChevronRight size={16} />
-            </a>
-          ))}
+        <nav aria-label="Navegación principal">
+          <a href="#perfil">Perfil</a>
+          <a href="#habilidades">Habilidades</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="#trayectoria">Trayectoria</a>
         </nav>
+        <a className="header-contact" href="mailto:blackm3nma@gmail.com">Contactar <ArrowUpRight size={15} /></a>
       </header>
 
-      <div className="page-grid">
-        <aside className="side-rail" aria-label="Información y navegación del portafolio">
-          <a className="brand-lockup rail-brand" href="#inicio" aria-label="Ir al inicio">
-            <img
-              src="/manus-storage/irving-leyva-mark_7d4d3b6d.png"
-              alt=""
-              className="brand-mark"
-            />
-            <span>IL / 2026</span>
-          </a>
-
-          <div className="rail-identity">
-            <p className="rail-eyebrow">Portafolio profesional</p>
-            <p className="rail-name">Irving Antonio<br />Leyva González</p>
-            <p className="rail-role">Ingeniería en Sistemas<br />Computacionales · Jr.</p>
+      <main>
+        <section id="inicio" className="hero-section" aria-labelledby="hero-title">
+          <div className="hero-content">
+            <p className="eyebrow"><span /> Disponible para una oportunidad inicial en TI</p>
+            <h1 id="hero-title">Irving Antonio<br /><em>Leyva González</em></h1>
+            <p className="role">Egresado en Ingeniería en Sistemas Computacionales <strong>· Nivel Jr.</strong></p>
+            <p className="hero-text">
+              Construyo mi experiencia desde la práctica en soporte técnico, redes y desarrollo de software.
+              Busco integrarme a un equipo donde aprender, documentar y resolver problemas tenga impacto real.
+            </p>
+            <div className="hero-actions">
+              <a className="primary-button" href="mailto:blackm3nma@gmail.com">Enviar correo <Mail size={17} /></a>
+              <a className="plain-link" href="tel:+525566612860"><Phone size={16} /> 55 6661 2860</a>
+            </div>
           </div>
 
-          <nav className="rail-nav" aria-label="Secciones del portafolio">
-            {navItems.map((item, index) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={activeSection === item.id ? "is-active" : ""}
-              >
-                <span>0{index + 1}</span>
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          <figure className="portrait-card">
+            <img src="/manus-storage/irving-leyva-retrato_b6fb0514.jpeg" alt="Retrato profesional de Irving Antonio Leyva González" />
+            <figcaption><span>CDMX</span><span>2026</span></figcaption>
+          </figure>
+        </section>
 
-          <div className="rail-contact">
-            <a href="mailto:blackm3nma@gmail.com">
-              <Mail size={16} />
-              <span>blackm3nma@gmail.com</span>
-            </a>
-            <a href="tel:+525566612860">
-              <Phone size={16} />
-              <span>55 6661 2860</span>
-            </a>
-            <p><MapPin size={16} /> Ciudad de México</p>
+        <section className="quick-facts" aria-label="Información principal">
+          <div><MapPin size={18} /><span><strong>Ubicación</strong>Ciudad de México</span></div>
+          <div><GraduationCap size={19} /><span><strong>Formación</strong>UNIREM · Egresado 2026</span></div>
+          <div><FileBadge2 size={18} /><span><strong>Idiomas</strong>Cambridge English B1</span></div>
+        </section>
+
+        <section id="perfil" className="content-section profile-section" aria-labelledby="perfil-title">
+          <div className="section-label"><span>01</span><p>Perfil</p></div>
+          <div className="section-content">
+            <h2 id="perfil-title">Perfil profesional</h2>
+            <p className="lead-text">
+              Egresado de la carrera de Ingeniería en Sistemas Computacionales por la Universidad de la República Mexicana (UNIREM).
+              Cuento con conocimientos teóricos y prácticos de nivel básico a intermedio en desarrollo de software, mantenimiento de hardware, redes y soporte técnico.
+            </p>
+            <p>
+              Me caracterizo por mi disposición para aprender, resolver problemas técnicos paso a paso y adaptarme a diferentes herramientas tecnológicas. Busco una oportunidad inicial en el área de TI, soporte o sistemas.
+            </p>
           </div>
-        </aside>
+        </section>
 
-        <main>
-          <section id="inicio" className="hero" aria-labelledby="hero-title">
-            <div className="hero-copy">
-              <p className="section-kicker">01 — Perfil profesional</p>
-              <div className="status-line"><span /> Disponible para una oportunidad inicial en TI</div>
-              <h1 id="hero-title">Diagnosticar.<br /><em>Aprender.</em><br />Dar soporte.</h1>
-              <p className="hero-intro">
-                Egresado de Ingeniería en Sistemas Computacionales con una base práctica en soporte técnico,
-                redes y desarrollo. Busco integrarme a un equipo donde la curiosidad, el orden y la resolución
-                paso a paso se conviertan en resultados útiles.
-              </p>
-              <div className="hero-actions">
-                <a className="button-primary" href="mailto:blackm3nma@gmail.com">
-                  Contactar por correo <ArrowUpRight size={18} />
-                </a>
-                <a className="text-link" href="#proyectos">
-                  Ver proyectos <ChevronRight size={17} />
-                </a>
-              </div>
-            </div>
-
-            <figure className="hero-visual">
-              <img
-                src="/manus-storage/irving-leyva-hero-systems_7657d2ff.jpg"
-                alt="Estación de diagnóstico técnico con geometrías de computadora y red"
-              />
-              <figcaption className="visual-stamp">
-                <span className="stamp-dot" />
-                <span>Perfil Jr.<br />Sistemas &amp; soporte</span>
-              </figcaption>
-            </figure>
-
-            <div className="hero-facts" aria-label="Datos principales">
-              <div><strong>2026</strong><span>Egreso<br />UNIREM</span></div>
-              <div><strong>240 h</strong><span>Prácticas<br />profesionales</span></div>
-              <div><strong>B1</strong><span>Cambridge<br />English</span></div>
-            </div>
-          </section>
-
-          <section id="perfil" className="profile-section signal-section" data-section aria-labelledby="perfil-title">
-            <div className="section-index">01</div>
-            <div className="section-heading">
-              <p className="section-kicker">Resumen de perfil</p>
-              <h2 id="perfil-title">Una base técnica con disposición para crecer.</h2>
-            </div>
-            <div className="profile-body">
-              <p className="large-copy">
-                Mi formación combina conocimientos teóricos y prácticos de nivel básico a intermedio en
-                desarrollo de software, mantenimiento de hardware, redes y soporte técnico.
-              </p>
-              <div className="profile-note">
-                <Wrench size={23} />
-                <p>
-                  Me caracterizo por aprender herramientas nuevas con rapidez, documentar lo necesario y
-                  resolver incidencias paso a paso. Mi objetivo es aportar desde un rol inicial de TI,
-                  soporte o sistemas.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section id="capacidades" className="capabilities-section" data-section aria-labelledby="capacidades-title">
-            <div className="section-intro-row">
-              <div>
-                <p className="section-kicker">02 — Conocimientos técnicos</p>
-                <h2 id="capacidades-title">Capacidades en construcción, aplicadas con criterio.</h2>
-              </div>
-              <p className="intro-aside">La claridad sobre el nivel de práctica forma parte de mi forma de trabajar.</p>
-            </div>
-
-            <div className="capability-list">
-              {capabilities.map((capability) => {
-                const Icon = capability.icon;
+        <section id="habilidades" className="content-section skill-section" aria-labelledby="habilidades-title">
+          <div className="section-label"><span>02</span><p>Habilidades</p></div>
+          <div className="section-content">
+            <h2 id="habilidades-title">Conocimientos técnicos</h2>
+            <div className="skills-grid">
+              {skills.map((skill) => {
+                const Icon = skill.icon;
                 return (
-                  <article key={capability.number} className="capability-card">
-                    <div className="capability-topline">
-                      <span>{capability.number}</span>
-                      <Icon size={23} strokeWidth={1.7} />
-                    </div>
-                    <p className="level-label">{capability.level}</p>
-                    <h3>{capability.title}</h3>
-                    <p className="capability-summary">{capability.summary}</p>
-                    <ul>
-                      {capability.items.map((item) => <li key={item}><CheckCircle2 size={15} />{item}</li>)}
-                    </ul>
+                  <article className="skill-card" key={skill.title}>
+                    <Icon size={23} strokeWidth={1.7} />
+                    <p className="skill-status">{skill.status}</p>
+                    <h3>{skill.title}</h3>
+                    <ul>{skill.items.map((item) => <li key={item}>{item}</li>)}</ul>
                   </article>
                 );
               })}
             </div>
+            <p className="tools-line"><strong>Herramientas:</strong> Microsoft Access, Linux Mint, CachyOS, Excel, Word, Cisco Packet Tracer, Unity y Blockbench.</p>
+          </div>
+        </section>
 
-            <div className="toolband">
-              <p>Herramientas y entornos</p>
-              <div>{tools.map((tool) => <span key={tool}>{tool}</span>)}</div>
-            </div>
-          </section>
-
-          <section id="proyectos" className="projects-section signal-section" data-section aria-labelledby="proyectos-title">
-            <div className="section-index">03</div>
-            <div className="section-heading project-heading">
-              <p className="section-kicker">Proyectos académicos y personales</p>
-              <h2 id="proyectos-title">Práctica que aterriza los fundamentos.</h2>
-              <p>
-                Una selección de ejercicios donde conecto conceptos de infraestructura, datos e interactividad.
-              </p>
-            </div>
-
+        <section id="proyectos" className="content-section projects-section" aria-labelledby="proyectos-title">
+          <div className="section-label"><span>03</span><p>Portafolio</p></div>
+          <div className="section-content">
+            <h2 id="proyectos-title">Proyectos académicos y personales</h2>
             <div className="project-list">
-              {projects.map((project) => (
-                <article key={project.index} className="project-card">
-                  <div className="project-image-wrap">
-                    <img src={project.image} alt={project.alt} />
-                    <span>{project.index}</span>
-                  </div>
-                  <div className="project-copy">
-                    <p className="project-category">{project.category}</p>
+              {projects.map((project, index) => (
+                <article className="project-row" key={project.title}>
+                  <span className="project-number">0{index + 1}</span>
+                  <div>
                     <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <div className="project-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                    <p className="project-meta">{project.meta}</p>
+                    <p>{project.text}</p>
                   </div>
                 </article>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section id="trayectoria" className="journey-section" data-section aria-labelledby="trayectoria-title">
-            <div className="section-intro-row">
-              <div>
-                <p className="section-kicker">04 — Trayectoria</p>
-                <h2 id="trayectoria-title">Formación con experiencia de apoyo en campo.</h2>
-              </div>
-            </div>
-
+        <section id="trayectoria" className="content-section trajectory-section" aria-labelledby="trayectoria-title">
+          <div className="section-label"><span>04</span><p>Trayectoria</p></div>
+          <div className="section-content">
+            <h2 id="trayectoria-title">Educación y experiencia</h2>
             <div className="timeline">
-              <article className="timeline-item education-item">
-                <div className="timeline-date">2026</div>
-                <div className="timeline-marker"><GraduationCap size={19} /></div>
-                <div className="timeline-content">
-                  <p className="timeline-label">Educación</p>
+              <article>
+                <p className="timeline-date">2026</p>
+                <div>
+                  <p className="timeline-type">Educación</p>
                   <h3>Ingeniería en Sistemas Computacionales</h3>
-                  <p className="timeline-org">Universidad de la República Mexicana (UNIREM) · Egresado</p>
-                  <p>Formación universitaria enfocada en fundamentos de sistemas, programación, redes y herramientas tecnológicas.</p>
+                  <p className="organization">Universidad de la República Mexicana (UNIREM) · Egresado</p>
                 </div>
               </article>
-
-              <article className="timeline-item">
-                <div className="timeline-date">Feb — May<br />2026</div>
-                <div className="timeline-marker"><Wrench size={18} /></div>
-                <div className="timeline-content">
-                  <p className="timeline-label">Prácticas profesionales · 240 horas</p>
+              <article>
+                <p className="timeline-date">Feb — May 2026</p>
+                <div>
+                  <p className="timeline-type">Prácticas profesionales · 240 horas</p>
                   <h3>CETis 50</h3>
-                  <p className="timeline-org">Apoyo administrativo y técnico dentro del plantel.</p>
-                  <div className="experience-points">
-                    <span>Documentos en Word y Excel</span>
-                    <span>Entrega de equipos audiovisuales</span>
-                    <span>Atención de incidencias sencillas</span>
-                  </div>
+                  <p className="organization">Apoyo en documentos de Word y Excel, entrega de equipos audiovisuales y atención de incidencias técnicas sencillas.</p>
                 </div>
               </article>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section id="credenciales" className="credentials-section signal-section" data-section aria-labelledby="credenciales-title">
-            <div className="section-index">05</div>
-            <div className="section-heading credentials-heading">
-              <p className="section-kicker">Idiomas, cursos y documentos</p>
-              <h2 id="credenciales-title">Credenciales disponibles para consulta.</h2>
+        <section className="content-section credentials-section" aria-labelledby="credenciales-title">
+          <div className="section-label"><span>05</span><p>Credenciales</p></div>
+          <div className="section-content">
+            <h2 id="credenciales-title">Cursos y certificaciones</h2>
+            <div className="credential-links">
+              <a href="/manus-storage/LG0000012881_904fef8f.pdf" target="_blank" rel="noreferrer">
+                <FileBadge2 size={22} /><span><strong>Cambridge English: B1 Preliminary</strong>Ver certificado de inglés</span><ArrowUpRight size={18} />
+              </a>
+              <a href="/manus-storage/Confirmacion_OQI-153_2d9e85bb.pdf" target="_blank" rel="noreferrer">
+                <BriefcaseBusiness size={22} /><span><strong>OQI-Hackathon: Cómputo Cuántico</strong>Ver confirmación de participación</span><ArrowUpRight size={18} />
+              </a>
+              <div className="credential-static"><Network size={22} /><span><strong>Cursos introductorios de redes</strong>Cisco Networking Academy · 2026</span></div>
             </div>
+          </div>
+        </section>
 
-            <div className="credential-grid">
-              <article className="credential-card featured-credential">
-                <div className="credential-icon"><FileBadge2 size={27} /></div>
-                <div>
-                  <p className="credential-type">Idioma</p>
-                  <h3>Cambridge English: B1 Preliminary</h3>
-                  <p>Certificado de inglés · Documento LG0000012881</p>
-                </div>
-                <a href="/manus-storage/LG0000012881_904fef8f.pdf" target="_blank" rel="noreferrer" className="credential-link">
-                  Ver certificado <ArrowUpRight size={17} />
-                </a>
-              </article>
+        <section className="contact-band" aria-labelledby="contacto-title">
+          <p className="eyebrow light"><span /> Contacto</p>
+          <h2 id="contacto-title">Listo para comenzar en un equipo de TI.</h2>
+          <p>Me gustaría conversar sobre una vacante de soporte técnico, sistemas o tecnología.</p>
+          <div>
+            <a className="light-button" href="mailto:blackm3nma@gmail.com">blackm3nma@gmail.com <ArrowUpRight size={17} /></a>
+            <a href="tel:+525566612860">55 6661 2860</a>
+          </div>
+        </section>
+      </main>
 
-              <article className="credential-card">
-                <div className="credential-icon"><Cpu size={27} /></div>
-                <div>
-                  <p className="credential-type">Taller · 2026</p>
-                  <h3>OQI-Hackathon: Cómputo Cuántico</h3>
-                  <p>Participación confirmada · Folio OQI-153</p>
-                </div>
-                <a href="/manus-storage/Confirmacion_OQI-153_2d9e85bb.pdf" target="_blank" rel="noreferrer" className="credential-link">
-                  Ver confirmación <ArrowUpRight size={17} />
-                </a>
-              </article>
-
-              <article className="credential-card credential-note">
-                <div className="credential-icon"><Network size={27} /></div>
-                <div>
-                  <p className="credential-type">Formación complementaria · 2026</p>
-                  <h3>Cursos introductorios de redes</h3>
-                  <p>Cisco Networking Academy · Fundamentos para reforzar el trabajo con conectividad y topologías.</p>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <section className="contact-section" aria-labelledby="contacto-title">
-            <div className="contact-symbol"><img src="/manus-storage/irving-leyva-mark_7d4d3b6d.png" alt="" /></div>
-            <p className="section-kicker">Siguiente paso</p>
-            <h2 id="contacto-title">¿Hablamos sobre cómo puedo apoyar a su equipo?</h2>
-            <p>Estoy disponible para oportunidades iniciales en tecnología, soporte técnico o sistemas.</p>
-            <div className="contact-actions">
-              <a className="button-primary" href="mailto:blackm3nma@gmail.com">Escribir a Irving <Mail size={18} /></a>
-              <a className="contact-phone" href="tel:+525566612860"><Phone size={17} /> 55 6661 2860</a>
-            </div>
-          </section>
-
-          <footer className="site-footer">
-            <p>© {new Date().getFullYear()} Irving Antonio Leyva González</p>
-            <a href="#inicio"><Download size={15} /> Volver al inicio</a>
-          </footer>
-        </main>
-      </div>
+      <footer><span>© {new Date().getFullYear()} Irving Antonio Leyva González</span><span>Portafolio &amp; CV</span></footer>
     </div>
   );
 }

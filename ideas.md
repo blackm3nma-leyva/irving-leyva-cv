@@ -66,3 +66,9 @@ El distintivo será un **nodo técnico circular**: tres trazos geométricos cone
 ### Color distintivo de marca
 
 **Naranja Señal `#F36B2A`**, utilizado exclusivamente para estados, enlaces importantes, marcadores de trayectoria y llamadas a la acción.
+
+## Style Decisions
+
+La versión actual prioriza una composición de **CV esencial**: se elimina la narrativa visual más compleja, se conserva la paleta azul tinta y naranja señal, y se da prioridad a la fotografía profesional, los datos de contacto y la lectura rápida de experiencia, habilidades y proyectos. Las ilustraciones conceptuales dejan de competir con el contenido curricular para mantener una presentación más directa para reclutadores.
+
+La composición de CV esencial conserva tres señales visibles de expediente técnico: un carril lateral informativo en escritorio, una línea de señalización vertical y etiquetas compactas de nivel o evidencia. El naranja señal se reserva para estados, rutas de lectura, acciones y marcadores técnicos.
