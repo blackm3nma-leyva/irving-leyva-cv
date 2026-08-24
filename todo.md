@@ -5,3 +5,10 @@
 - [x] Integrar la fotografía en el encabezado del CV.
 - [x] Verificar el resultado en escritorio y móvil.
 - [x] Guardar y entregar la versión actualizada.
+
+## Corrección de GitHub Pages
+
+- [x] Revisar el repositorio y la configuración de la compilación estática.
+- [x] Añadir un flujo de publicación para GitHub Pages y ajustar las rutas del sitio.
+- [ ] Validar el artefacto de producción y documentar la activación de Pages.
+- [ ] Guardar y entregar la corrección.

@@ -58,7 +58,7 @@ export default function Home() {
   return (
     <div className="cv-page">
       <aside className="technical-rail" aria-label="Datos técnicos del perfil">
-        <img src="/manus-storage/irving-leyva-mark_7d4d3b6d.png" alt="Monograma técnico de Irving Leyva" />
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663910841957/YPrjsOPjcoKSDYju.png" alt="Monograma técnico de Irving Leyva" />
         <p className="rail-code">IL / CV-26</p>
         <span className="rail-line" />
         <p className="rail-meta">PERFIL JR.<br />SISTEMAS</p>
@@ -66,7 +66,7 @@ export default function Home() {
       </aside>
       <header className="site-header">
         <a href="#inicio" className="wordmark" aria-label="Ir al inicio">
-          <img src="/manus-storage/irving-leyva-mark_7d4d3b6d.png" alt="" />
+          <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663910841957/YPrjsOPjcoKSDYju.png" alt="" />
           <span>Irving Leyva</span>
         </a>
         <nav aria-label="Navegación principal">
@@ -95,7 +95,7 @@ export default function Home() {
           </div>
 
           <figure className="portrait-card">
-            <img src="/manus-storage/irving-leyva-retrato_b6fb0514.jpeg" alt="Retrato profesional de Irving Antonio Leyva González" />
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663910841957/HdPuDvCExpjYMSEj.jpeg" alt="Retrato profesional de Irving Antonio Leyva González" />
             <figcaption><span>CDMX</span><span>2026</span></figcaption>
           </figure>
         </section>
@@ -190,10 +190,10 @@ export default function Home() {
           <div className="section-content">
             <h2 id="credenciales-title">Cursos y certificaciones</h2>
             <div className="credential-links">
-              <a href="/manus-storage/LG0000012881_904fef8f.pdf" target="_blank" rel="noreferrer">
+              <a href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663910841957/gpjxJPmDXquXnfSZ.pdf" target="_blank" rel="noreferrer">
                 <FileBadge2 size={22} /><span><strong>Cambridge English: B1 Preliminary</strong>Ver certificado de inglés</span><ArrowUpRight size={18} />
               </a>
-              <a href="/manus-storage/Confirmacion_OQI-153_2d9e85bb.pdf" target="_blank" rel="noreferrer">
+              <a href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663910841957/rvGOdVIVURLnjgXX.pdf" target="_blank" rel="noreferrer">
                 <BriefcaseBusiness size={22} /><span><strong>OQI-Hackathon: Cómputo Cuántico</strong>Ver confirmación de participación</span><ArrowUpRight size={18} />
               </a>
               <div className="credential-static"><Network size={22} /><span><strong>Cursos introductorios de redes</strong>Cisco Networking Academy · 2026</span></div>
